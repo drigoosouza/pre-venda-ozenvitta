@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Nova Rotina Matinal para Desinchar - Foco, Saúde e Bem-Estar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="./assert/logo.png" type="image/x-icon">
+    <style>
+        /* Variáveis de Cores e Estilos */
+        :root {
+            --primary-color: #10b981;
+            /* Verde Saúde */
+            --primary-dark: #059669;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #f8fafc;
+            --white: #ffffff;
+            --gradient-cta: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho "Portal de Notícias" */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-portal {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-fake {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .menu-fake span {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .menu-fake span:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Tipografia da Matéria */
+        .categoria {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .meta-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .meta-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #334155;
+        }
+
+        h2 {
+            margin: 40px 0 20px 0;
+            font-size: 1.6rem;
+            color: #0f172a;
+        }
+
+        .carousel-wrapper {
+            margin: 40px 0;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 15px;
+            /* Espaço para não cortar a sombra */
+            /* Esconde a barra de rolagem nativa para um visual mais limpo */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            /* No celular, mostra 70% de uma imagem, deixando a pontinha da próxima aparecendo para induzir o scroll */
+            flex: 0 0 70%;
+            max-width: 280px;
+            scroll-snap-align: center;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            /* Evita que a imagem seja "arrastada" como arquivo e permite o swipe fluido */
+        }
+
+        /* Lista de Benefícios */
+        .beneficios {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .beneficios li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .beneficios i {
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        /* Botões Call to Action (CTA) */
+        .cta-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--gradient-cta);
+            color: var(--white);
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+
+        .cta-button i {
+            margin-left: 10px;
+        }
+
+        /* Animação de Pulso no Botão */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .pulse-anim {
+            animation: pulse 2s infinite;
+        }
+
+        /* Botão Flutuante (FAB) */
+        .fab-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateY(150px);
+            /* Escondido inicialmente */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fab-container.show {
+            transform: translateY(0);
+        }
+
+        .fab-btn {
+            background: var(--gradient-cta);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .fab-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animações de Scroll (AOS) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade Mobile */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .menu-fake span {
+                display: none;
+            }
+
+            /* Esconde menu no celular para focar na logo */
+            .fab-btn {
+                font-size: 0.9rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '936653368935665');
+        fbq('track', 'PageView');
+            fbq('track', 'Lead');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=936653368935665&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-portal">
+            <i class="fa-solid fa-leaf"></i> Foco, Saúde e Bem-Estar
+        </div>
+        <div class="menu-fake">
+            <span>Saúde</span>
+            <span>Bem-Estar</span>
+            <span>Nutrição</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <span class="categoria">Descoberta em Alta</span>
+
+        <h1>A nova rotina matinal que está ajudando milhares de mulheres a recuperar a autoestima de forma natural</h1>
+
+        <div class="meta-info">
+            <img src="./assert/logo.png" alt="Autora da matéria">
+            <div>
+                <strong>Por Redação</strong><br>
+                Atualizado em: <span id="data-atual"></span>
+            </div>
+        </div>
+
+        <p class="reveal">Se você sente que seu metabolismo travou, que o cansaço domina o seu dia e que as dietas
+            restritivas só trazem frustração, saiba que <strong>você não está sozinha</strong>.</p>
+
+        <p class="reveal">A dificuldade em manter uma rotina leve e com energia é uma queixa comum entre mulheres acima
+            dos 30 anos. Mas recentemente, um novo hábito começou a circular silenciosamente nos bastidores das clínicas
+            de estética e bem-estar.</p>
+
+        <h2 class="reveal">O Segredo Revelado: Como a Ozenvitta funciona?</h2>
+
+        <p class="reveal">Foi investigando essa dificuldade que nossa equipe descobriu um composto que virou febre no
+            Brasil: a <strong>Ozenvitta</strong>. Diferente de soluções extremas, ela age de forma inteligente no
+            organismo.</p>
+
+        <ul class="beneficios reveal">
+            <li><i class="fa-solid fa-check-circle"></i> <strong>Ação Detox:</strong> Ajuda a reduzir a sensação de
+                inchaço constante.</li>
+            <li><i class="fa-solid fa-check-circle"></i> <strong>Energia Limpa:</strong> Promove mais disposição para
+                enfrentar a correria do dia a dia.</li>
+            <li><i class="fa-solid fa-check-circle"></i> <strong>Equilíbrio:</strong> Auxilia na diminuição natural
+                daquela vontade incontrolável por doces.</li>
+            <li><i class="fa-solid fa-check-circle"></i> <strong>Segurança:</strong> Fórmula com ingredientes aprovados.
+            </li>
+        </ul>
+
+        <h2 class="reveal">O que dizem as leitoras?</h2>
+
+        <div class="reveal"
+            style="background: #f1f5f9; padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+            <p style="font-style: italic; margin-bottom: 0;">"Eu já tinha tentado mudar minha rotina de várias formas e
+                vivia frustrada. Comecei a usar a Ozenvitta faz algumas semanas e a sensação de leveza é incrível. Até o
+                caimento das minhas roupas mudou, estou muito mais confiante!" <strong>- Mariana S., 42 anos.</strong>
+            </p>
+        </div>
+
+        <div class="carousel-wrapper reveal">
+            <h3 style="text-align: center; font-size: 1.1rem; color: var(--text-light); margin-bottom: 15px;">
+                Resultados reais de quem já transformou a rotina:
+            </h3>
+            <div class="carousel-track" id="autoCarousel">
+                <div class="carousel-item">
+                    <img src="./assert/1.jpg" alt="Mulher feliz e confiante">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assert/2.jpg" alt="Mulher com energia pela manhã">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assert/3.jpeg" alt="Mulher com roupa confortável">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assert/4.png" alt="Mulher sorrindo no espelho">
+                </div>
+            </div>
+        </div>
+
+        <h2 class="reveal">Como garantir e testar? (Atenção ao Estoque)</h2>
+
+        <p class="reveal">Entramos em contato com os distribuidores oficiais da Ozenvitta. Eles liberaram um lote
+            especial com condições exclusivas, mas devido à alta demanda gerada por esta matéria, <strong>o estoque está
+                nas últimas unidades</strong>.</p>
+
+        <p class="reveal">Para verificar se ainda há disponibilidade e garantir o seu com segurança, acesse o site
+            oficial no botão abaixo:</p>
+
+        <a href="https://ozemvittarepresentante.netlify.app" class="cta-button pulse-anim reveal">
+            VERIFICAR DISPONIBILIDADE NO SITE OFICIAL <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <script>
+            document.querySelector(".cta-button").addEventListener("click", ()=>{
+                fbq('track', 'Lead');
+            })
+        </script>
+
+       
+
+    </div>
+
+    <div class="fab-container" id="fabBtn">
+        <a href="https://ozemvittarepresentante.netlify.app" class="fab-btn pulse-anim">
+            Ver Oferta Ozenvitta <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+        <script>
+            document.querySelector(".fab-btn").addEventListener("click", ()=>{
+                fbq('track', 'Lead');
+            })
+        </script>
+    </div>
+
+    <script>
+        // 1. Inserir a data de hoje automaticamente para gerar prova social de "notícia fresca"
+        const dataAtual = new Date().toLocaleDateString('pt-BR');
+        document.getElementById('data-atual').innerText = dataAtual;
+
+        // 2. Animações de Scroll (AOS Vanilla JS)
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 }); // Dispara quando 10% do elemento aparece
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+
+        // 3. Mostrar Botão Flutuante após o usuário rolar 300px (Gera curiosidade primeiro)
+        window.onscroll = function () {
+            const fab = document.getElementById('fabBtn');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                fab.classList.add('show');
+            } else {
+                fab.classList.remove('show');
+            }
+        };
+
+        // 4. Lógica do Carrossel Automático (Movimento da direita pra esquerda e touch)
+        const carousel = document.getElementById('autoCarousel');
+        let autoPlayInterval;
+
+        // Função que move o carrossel
+        function startCarousel() {
+            autoPlayInterval = setInterval(() => {
+                const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+
+                // Se chegou no final, volta suavemente para o início
+                if (carousel.scrollLeft >= maxScrollLeft - 5) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    // Pula para a próxima imagem (pega a largura de um item + o gap)
+                    const scrollAmount = carousel.querySelector('.carousel-item').offsetWidth + 15;
+                    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }, 3000); // Roda a cada 3 segundos (tempo ideal para a pessoa absorver a imagem)
+        }
+
+        // Inicia o carrossel
+        startCarousel();
+
+        // UX: Pausa o carrossel se o usuário tocar/arrastar (evita brigar com o dedo da pessoa)
+        carousel.addEventListener('touchstart', () => clearInterval(autoPlayInterval));
+        carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+
+        // Retoma o movimento automático quando o usuário solta a tela ou tira o mouse
+        carousel.addEventListener('touchend', () => {
+            setTimeout(startCarousel, 2000); // Espera 2 seg após soltar para voltar a mover
+        });
+        carousel.addEventListener('mouseleave', () => startCarousel());
+    </script>
+</body>
+
+</html>
